@@ -41,9 +41,7 @@ export default function Map() {
     });
 
     return () => {
-      if (mapRef.current) {
-        mapRef.current.destroy();
-      }
+      mapRef.current = null;
     };
   }, []);
 
