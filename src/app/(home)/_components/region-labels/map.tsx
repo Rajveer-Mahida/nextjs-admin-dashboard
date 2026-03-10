@@ -42,7 +42,7 @@ export default function Map() {
 
     return () => {
       if (mapRef.current) {
-        mapRef.current.map.remove();
+        mapRef.current.destroy();
       }
     };
   }, []);
