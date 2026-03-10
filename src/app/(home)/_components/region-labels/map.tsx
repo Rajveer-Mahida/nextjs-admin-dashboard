@@ -1,13 +1,15 @@
 "use client";
 
 import jsVectorMap from "jsvectormap";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 import "@/js/us-aea-en";
 
 export default function Map() {
+  const mapRef = useRef<any>(null);
+
   useEffect(() => {
-    new jsVectorMap({
+    mapRef.current = new jsVectorMap({
       selector: "#mapOne",
       map: "us_aea_en",
       zoomButtons: true,
@@ -37,10 +39,16 @@ export default function Map() {
         },
       },
     });
+
+    return () => {
+      if (mapRef.current) {
+        mapRef.current.map.remove();
+      }
+    };
   }, []);
 
   return (
-    <div className="h-[422px]">
+    <div className="h-auto min-h-[300px] lg:min-h-[422px]">
       <div id="mapOne" className="mapOne map-btn" />
     </div>
   );
